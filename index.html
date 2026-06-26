@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Personalidade: Quem é você adiando tarefas?</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0f0c20; color: #fff; text-align: center; padding: 20px; }
+        .card { background: #1b1437; padding: 30px; border-radius: 15px; max-width: 450px; margin: 40px auto; box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+        h2 { color: #ff007f; font-size: 22px; }
+        .btn { display: block; width: 100%; background: #6f00ff; color: white; border: none; padding: 12px; margin: 10px 0; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.2s; }
+        .btn:hover { background: #ff007f; transform: scale(1.02); }
+        .resultado { font-size: 18px; line-height: 1.6; border: 2px dashed #ff007f; padding: 15px; margin-top: 20px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 id="titulo">Descubra: Mente Absoluta O Desafio que 99% Falham</h2>
+    <p id="pergunta">Você tem um relatório ou trabalho super importante para entregar amanhã cedo. O que você faz agora?</p>
+    <div id="opcoes">
+        <button class="btn" onclick="proxima(1)">Começo a arrumar meu guarda-roupa por cor para clarear a mente.</button>
+        <button class="btn" onclick="proxima(2)">Abro o YouTube para ver um tutorial de 2 horas sobre foco.</button>
+        <button class="btn" onclick="proxima(3)">Vou jogar videogame. Noite adentro o desespero me dará superpoderes.</button>
+        <button class="btn" onclick="proxima(4)">Aceito que o cansaço venceu, vou dormir e rezo por um milagre.</button>
+    </div>
+</div>
+
+<script>
+let etapa = 1;
+let pontuacao = 0;
+
+function proxima(pontosOpcao) {
+    pontuacao += pontosOpcao;
+    etapa++;
+
+    let perguntaHtml = document.getElementById("pergunta");
+    let opcoesHtml = document.getElementById("opcoes");
+
+    if (etapa === 2) {
+        perguntaHtml.innerText = "Seu celular vibra com uma notificação no meio do foco. Qual sua reação?";
+        opcoesHtml.innerHTML = `
+            <button class="btn" onclick="proxima(1)">Deixo no silencioso, mas limpo a tela dele com álcool em gel.</button>
+            <button class="btn" onclick="proxima(2)">Entro no TikTok 'só por 5 minutos' e saio 2 horas depois.</button>
+            <button class="btn" onclick="proxima(3)">Respondo na hora, afinal a pressão social me consome.</button>
+            <button class="btn" onclick="proxima(4)">Desligo o celular, deito na cama e começo a encarar o teto.</button>
+        `;
+    } else if (etapa === 3) {
+        perguntaHtml.innerText = "Faltam exatamente 2 horas para o prazo final e você não fez nada. Estado de espírito:";
+        opcoesHtml.innerHTML = `
+            <button class="btn" onclick="proxima(1)">Pelo menos minha mesa de trabalho está incrivelmente limpa.</button>
+            <button class="btn" onclick="proxima(2)">Procurando playlists de 'Música Quântica para Concentração'.</button>
+            <button class="btn" onclick="proxima(3)">Entrando no modo Berserker: digito 80 palavras por minuto chorando.</button>
+            <button class="btn" onclick="proxima(4)">Paz interior. O que tiver que ser, será.</button>
+        `;
+    } else {
+        mostrarResultado();
+    }
+}
+
+function mostrarResultado() {
+    document.getElementById("titulo").innerText = "Seu Resultado Oficial! 👑";
+    let perguntaHtml = document.getElementById("pergunta");
+    let opcoesHtml = document.getElementById("opcoes");
+    
+    let perfil = "";
+    let desc = "";
+
+    if (pontuacao <= 4) {
+        perfil = "O Faxineiro Produtivo🧹";
+        desc = "Você não faz o que precisa, mas sua casa fica impecável. Você procrastina limpando o quarto, organizando pastas e lavando a louça só para fingir que está sendo útil.";
+    } else if (pontuacao <= 7) {
+        perfil = "O Filósofo de TikTok 📱";
+        desc = "Você passa horas assistindo a vídeos de rotina matinal e dicas de foco de bilionários. Você planeja tudo perfeitamente na mente, mas nunca começa na prática.";
+    } else if (pontuacao <= 10) {
+        perfil = "O Movido a Adrenalina 🔥";
+        desc = "Você só funciona sob extrema ameaça física ou psicológica. Se o prazo é meia-noite, você começa às 23:40 e entrega um trabalho milagroso usando o poder do puro desespero.";
+    } else {
+        perfil = "O Mestre do Desleixo 🛌";
+        desc = "Você atingiu o nirvana da procrastinação. Quando o problema aparece, você simplesmente vai dormir ou assistir a uma série e deixa o seu 'eu do futuro' se virar com as consequências.";
+    }
+
+    perguntaHtml.innerHTML = `<div class="resultado"><strong>${perfil}</strong><br><br>${desc}</div><br><p>Tire um print, poste nos Stories marcando a gente e veja o que seus amigos tiraram!</p>`;
+    opcoesHtml.innerHTML = `<button class="btn" onclick="location.reload()">Refazer o Teste</button>`;
+}
+</script>
+
+</body>
+</html>
+
+
+
